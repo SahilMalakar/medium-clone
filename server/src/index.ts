@@ -3,6 +3,7 @@ import cors from "cors";
 
 import {prisma} from "./config/db.js"
 import { userRouter } from "./routes/user.js";
+import { blogRouter } from "./routes/blog.js";
 
 const app = express();
 // Middlewares
@@ -43,6 +44,7 @@ app.get("/users", async (req, res, next) => {
 
 // all routes
 app.use("/api/v1/users",userRouter)
+app.use("/api/v1/users/blog",blogRouter)
 
 //Global Error Handler
 app.use((err: any, req: any, res: any, next: any) => {
