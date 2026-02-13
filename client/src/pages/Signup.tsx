@@ -1,8 +1,7 @@
+import AuthPage from "./AuthPage";
 
 function Signup() {
-  return (
-    <div>Signup</div>
-  )
+  return <AuthPage type="signup" />;
 }
 
-export default Signup
+export default Signup;
