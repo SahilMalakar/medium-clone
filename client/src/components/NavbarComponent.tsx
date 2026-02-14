@@ -9,7 +9,7 @@ type NavbarProps = {
   };
 };
 
-function Navbar({ user }: NavbarProps) {
+function NavbarComponet({ user }: NavbarProps) {
   const navigate = useNavigate();
 
   const authorName = user.username || user.email;
@@ -51,4 +51,4 @@ function Navbar({ user }: NavbarProps) {
   );
 }
 
-export default Navbar;
+export default NavbarComponet;

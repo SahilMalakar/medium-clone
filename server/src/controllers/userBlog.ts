@@ -36,13 +36,17 @@ export const createUserBlog = async (
   if (!req.user?.id) {
     return res.status(401).json({ message: "Unauthorized" });
   }
+  const authorId = Number(req.user.id);
 
+  if (isNaN(authorId)) {
+    return res.status(400).json({ message: "Invalid user id" });
+  }
   try {
     const blog = await prisma.blog.create({
       data: {
         title,
         content,
-        authorId: req.user?.id,
+        authorId,
       },
     });
 
@@ -77,12 +81,20 @@ export const updateUserBlog = async (
   if (!req.user?.id || !blogId) {
     return res.status(401).json({ message: "Unauthorized" });
   }
+  if (!req.user?.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const authorId = Number(req.user.id);
+
+  if (isNaN(authorId)) {
+    return res.status(400).json({ message: "Invalid user id" });
+  }
 
   try {
     const blog = await prisma.blog.update({
       where: {
         id: blogId,
-        authorId: req.user?.id, // ensures user can update only their own blog
+        authorId, // ensures user can update only their own blog
       },
       data: {
         title,
@@ -121,6 +133,19 @@ export const getUserBlog = async (
     const blog = await prisma.blog.findFirst({
       where: {
         id: blogId,
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        published: true,
+        author: {
+          select: {
+            id: true,
+            email: true,
+            username: true,
+          },
+        },
       },
     });
 

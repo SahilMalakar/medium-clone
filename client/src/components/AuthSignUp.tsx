@@ -22,10 +22,10 @@ function AuthSignUp() {
       );
       console.log(`response : ${JSON.stringify(response)}`);
 
-      const token = response.data;
+      const token = response.data.token;
+      localStorage.setItem("Token", token);
       console.log(`jwt : ${JSON.stringify(token)}`);
 
-      localStorage.setItem("Token", token);
       navigate("/blog");
     } catch (error) {
       console.log(error);

@@ -3,7 +3,7 @@ import BlogList from "../components/BlogList";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import BlogSkeleton from "../components/LoadingBlogSkeleton";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -39,14 +39,9 @@ function Blogs() {
       </div>
     );
   }
-  const user = {
-    username: "Sahil",
-    email: "sahil@gmail.com",
-  };
-
   return (
     <>
-      <Navbar user={user} />
+      <Navbar/>
       <div className="max-w-5xl mx-auto px-6">
         {/* BlogList here */}
         <BlogList blogs={blogs} />;
