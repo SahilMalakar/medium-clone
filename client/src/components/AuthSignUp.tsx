@@ -16,14 +16,17 @@ function AuthSignUp() {
 
   async function sendRequest() {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/v1/users/signup`,postInputs);
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/users/signup`,
+        postInputs,
+      );
       console.log(`response : ${JSON.stringify(response)}`);
 
-      const jwt = response.data;
-      console.log(`jwt : ${JSON.stringify(jwt)}`);
+      const token = response.data;
+      console.log(`jwt : ${JSON.stringify(token)}`);
 
-      localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      localStorage.setItem("Token", token);
+      navigate("/blog");
     } catch (error) {
       console.log(error);
       alert("error while signup");

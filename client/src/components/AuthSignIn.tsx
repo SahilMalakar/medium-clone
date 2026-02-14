@@ -11,23 +11,26 @@ function AuthSignIn() {
     email: "",
     password: "",
   });
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    async function sendRequest() {
-      try {
-        const response = await axios.post(`${BACKEND_URL}/api/v1/users/signin`,postInputs);
-        console.log(`response : ${JSON.stringify(response)}`);
+  async function sendRequest() {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/users/signin`,
+        postInputs,
+      );
+      console.log(`response : ${JSON.stringify(response)}`);
 
-        const jwt = response.data;
-        console.log(`jwt : ${JSON.stringify(jwt)}`);
+      const token = response.data.token;
+      localStorage.setItem("Token", token);
+      console.log(`jwt : ${JSON.stringify(token)}`);
 
-        localStorage.setItem("token", jwt);
-        navigate("/blogs");
-      } catch (error) {
-        console.log(error);
-        alert(`error while signin`);
-      }
+      navigate("/blog");
+    } catch (error) {
+      console.log(error);
+      alert(`error while signin`);
     }
+  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-white px-6">
       <div className="w-full max-w-sm">

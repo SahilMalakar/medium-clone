@@ -149,10 +149,13 @@ export const getAllBlog = async (
       select: {
         id: true,
         title: true,
+        content: true,
+        published: true,
         author: {
           select: {
             id: true,
             email: true,
+            username: true,
           },
         },
       },
